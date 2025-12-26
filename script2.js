@@ -178,10 +178,12 @@ function fetchFolders() {
                 foldersContainer.innerHTML = 'No folders found.';
             }
         })
+        
         .catch(err => {
             console.error(err);
             foldersContainer.innerHTML = 'Failed to load folders';
         });
+        
 }
 
 // ================== FETCH IMAGES FOR SELECTED FOLDER ==================
@@ -194,13 +196,20 @@ function fetchImages(folderName) {
             if (data.images && data.images.length > 0) {
                 data.images.forEach(imgPath => {
                     const image = document.createElement('img');
-                    image.src = `${BASE_URL}${imgPath}`;  // prepend server URL
+                    image.src = `${BASE_URL}${imgPath}`;
                     image.alt = folderName;
                     image.style.width = '150px';
                     image.style.margin = '10px';
                     image.style.borderRadius = '5px';
                     image.style.cursor = 'pointer';
-                    image.addEventListener('click', () => previewImg.src = `${BASE_URL}${imgPath}`);
+
+                    // ======= SET PREVIEW AND SCROLL INLINE =======
+                    image.setAttribute('onclick', `
+                        document.getElementById('previewImg').src='${BASE_URL}${imgPath}';
+                        document.getElementById('imagePreview').scrollIntoView({behavior:'smooth', block:'center'});
+                    `);
+                    // =================================================
+
                     imagesContainer.appendChild(image);
                 });
             } else {
@@ -212,3 +221,4 @@ function fetchImages(folderName) {
             imagesContainer.innerHTML = 'Failed to load images';
         });
 }
+
