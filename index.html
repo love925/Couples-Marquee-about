@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Couples Marquee</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header / Marquee Section -->
+    <header class="header">
+        <img src="images/marquee.jpg" alt="Couples Marquee" class="marquee-img">
+        <h1>Couples Marquee</h1>
+    </header>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <h2>Gallery</h2>
+
+        <!-- Slider -->
+        <div class="slider-container">
+            <button id="prevBtn">&#10094;</button>
+            <div class="slider" id="slider"></div>
+            <button id="nextBtn">&#10095;</button>
+        </div>
+
+        <button id="openGalleryBtn" class="btn">Open Gallery</button>
+
+        <!-- Gallery Modal -->
+<div id="galleryModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+
+        <!-- Folder list -->
+        <div class="folders-scroll" id="foldersContainer"></div>
+
+        <!-- Images + Preview Layout -->
+        <div class="gallery-body">
+            <!-- Images Grid -->
+            <div class="images-grid" id="imagesContainer"></div>
+
+            <!-- Image Preview -->
+            <div class="image-preview" id="imagePreview">
+                <img id="previewImg" src="" alt="Preview">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- About Section -->
+    <section class="about-section">
+        <h2>About</h2>
+        <div class="about-content">
+            <img src="images/about.jpg" alt="Couples Marquee" class="about-img">
+            <div class="about-info">
+                <p><strong>Name:</strong> ALi Haider</p>
+                <p><strong>Address:</strong> 123 Main Street, City, Country</p>
+                <p><strong>Email:</strong> alihaider87812@gmail.com</p>
+                <p><strong>Phone:</strong> +92 324 4835925</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="script2.js"></script>
+</body>
+</html>
