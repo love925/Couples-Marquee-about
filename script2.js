@@ -59,35 +59,35 @@ window.addEventListener('click', (e) => {
 
 
 // ================== FETCH FOLDERS ==================
-function fetchFolders() {
-    foldersContainer.innerHTML = 'Loading folders...';
-    fetch(`${BASE_URL}/api/decor/images/folders`)
-        .then(res => res.json())
-        .then(data => {
-            foldersContainer.innerHTML = '';
-            if (data && data.length > 0) {
-                data.forEach(folder => {
-                    const div = document.createElement('div');
-                    div.textContent = folder.folder_name;
-                    div.style.padding = '10px 15px';
-                    div.style.background = '#ffe6f0';
-                    div.style.cursor = 'pointer';
-                    div.style.borderRadius = '5px';
-                    div.style.marginBottom = '8px';
-                    div.addEventListener('click', () => fetchImages(folder.folder_name));
-                    foldersContainer.appendChild(div);
-                });
-            } else {
-                foldersContainer.innerHTML = 'No folders found.';
-            }
-        })
+// function fetchFolders() {
+//     foldersContainer.innerHTML = 'Loading folders...';
+//     fetch(`${BASE_URL}/api/decor/images/folders`)
+//         .then(res => res.json())
+//         .then(data => {
+//             foldersContainer.innerHTML = '';
+//             if (data && data.length > 0) {
+//                 data.forEach(folder => {
+//                     const div = document.createElement('div');
+//                     div.textContent = folder.folder_name;
+//                     div.style.padding = '10px 15px';
+//                     div.style.background = '#ffe6f0';
+//                     div.style.cursor = 'pointer';
+//                     div.style.borderRadius = '5px';
+//                     div.style.marginBottom = '8px';
+//                     div.addEventListener('click', () => fetchImages(folder.folder_name));
+//                     foldersContainer.appendChild(div);
+//                 });
+//             } else {
+//                 foldersContainer.innerHTML = 'No folders found.';
+//             }
+//         })
         
-        .catch(err => {
-            console.error(err);
-            foldersContainer.innerHTML = 'Failed to load folders';
-        });
+//         .catch(err => {
+//             console.error(err);
+//             foldersContainer.innerHTML = 'Failed to load folders';
+//         });
         
-}
+// }
 
 // ================== FETCH IMAGES FOR SELECTED FOLDER ==================
 function fetchImages(folderName) {
@@ -125,3 +125,39 @@ function fetchImages(folderName) {
         });
 }
 
+
+// ================== FETCH FOLDERS ==================
+function fetchFolders() {
+    foldersContainer.innerHTML = 'Loading folders...';
+    fetch(`${BASE_URL}/api/decor/images/folders`)
+        .then(res => res.json())
+        .then(data => {
+            foldersContainer.innerHTML = '';
+            if (data && data.length > 0) {
+                data.forEach(folder => {
+                    const div = document.createElement('div');
+                    div.textContent = folder.folder_name;
+                    div.style.padding = '10px 15px';
+                    div.style.background = '#ffe6f0';
+                    div.style.cursor = 'pointer';
+                    div.style.borderRadius = '5px';
+                    div.style.marginBottom = '8px';
+
+                    // ======= CLICK FOLDER: FETCH IMAGES + SCROLL TO IMAGES =======
+                    div.setAttribute('onclick', `
+                        fetchImages('${folder.folder_name}');
+                        document.getElementById('imagesContainer').scrollIntoView({behavior:'smooth', block:'start'});
+                    `);
+                    // ======================================================
+
+                    foldersContainer.appendChild(div);
+                });
+            } else {
+                foldersContainer.innerHTML = 'No folders found.';
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            foldersContainer.innerHTML = 'Failed to load folders';
+        });
+}
