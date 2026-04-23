@@ -18,8 +18,7 @@ h1, h2 {
 .marquee-img,
 .about-img,
 .slider img,
-.images-grid img,
-.image-preview img {
+.images-grid img {
     display: block;
 }
 
@@ -176,16 +175,11 @@ h1, h2 {
 
 /* Gallery Body */
 .gallery-body {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: flex-start;
-    align-items: flex-start;
+    display: block;
 }
 
 /* Images Grid */
 .images-grid {
-    flex: 3 1 600px;
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
@@ -208,26 +202,41 @@ h1, h2 {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* Image Preview */
-.image-preview {
-    flex: 1 1 280px;
-    width: 100%;
-    margin-top: 25px;
-    display: flex;
+/* Full Screen Image Modal */
+.full-image-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.92);
+    align-items: center;
     justify-content: center;
-    align-items: flex-start;
-    min-height: 220px;
+    padding: 20px;
 }
 
-.image-preview img {
-    max-width: 70%;
-    max-height: 400px;
+.full-image-modal.active {
+    display: flex;
+}
+
+.full-image-modal img {
+    max-width: 95vw;
+    max-height: 92vh;
     width: auto;
     height: auto;
-    border-radius: 15px;
-    border: 3px solid #d05c9b;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
     object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+}
+
+.full-image-close {
+    position: absolute;
+    top: 18px;
+    right: 24px;
+    color: #fff;
+    font-size: 34px;
+    line-height: 1;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 /* ================== ABOUT SECTION ================== */
@@ -267,15 +276,8 @@ h1, h2 {
         flex-direction: column;
     }
 
-    .gallery-body {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .images-grid,
-    .image-preview {
-        flex: 1 1 100%;
-        max-width: 100%;
+    .images-grid {
+        justify-content: center;
     }
 
     .images-grid img {
@@ -295,10 +297,6 @@ h1, h2 {
 
     .about-info p {
         text-align: center;
-    }
-
-    .image-preview img {
-        max-width: 90%;
     }
 }
 
@@ -332,7 +330,14 @@ h1, h2 {
         padding: 15px;
     }
 
-    .image-preview img {
-        max-width: 95%;
+    .full-image-close {
+        top: 12px;
+        right: 16px;
+        font-size: 30px;
+    }
+
+    .full-image-modal img {
+        max-width: 94vw;
+        max-height: 88vh;
     }
 }

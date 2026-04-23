@@ -48,8 +48,10 @@ const modal = document.getElementById('galleryModal');
 const closeModalBtn = document.querySelector('.close');
 const foldersContainer = document.getElementById('foldersContainer');
 const imagesContainer = document.getElementById('imagesContainer');
-const previewImg = document.getElementById('previewImg');
-const imagePreview = document.getElementById('imagePreview');
+
+const fullImageModal = document.getElementById('fullImageModal');
+const fullImageView = document.getElementById('fullImageView');
+const fullImageClose = document.getElementById('fullImageClose');
 
 const BASE_URL = 'https://rvngvlisjjwjxngufyok.supabase.co';
 const FOLDERS_ENDPOINT = `${BASE_URL}/functions/v1/gallery-folders`;
@@ -71,10 +73,9 @@ openGalleryBtn?.addEventListener('click', async () => {
     }
 });
 
-// Close modal
+// Close gallery modal
 closeModalBtn?.addEventListener('click', closeGalleryModal);
 
-// Close modal on outside click
 window.addEventListener('click', (e) => {
     if (e.target === modal) {
         closeGalleryModal();
@@ -84,8 +85,37 @@ window.addEventListener('click', (e) => {
 function closeGalleryModal() {
     if (modal) modal.style.display = 'none';
     if (imagesContainer) imagesContainer.innerHTML = '';
-    if (previewImg) previewImg.src = '';
 }
+
+// ================== FULL SCREEN IMAGE ==================
+function openFullImage(src, alt = 'Gallery Image') {
+    if (!fullImageModal || !fullImageView) return;
+
+    fullImageView.src = src;
+    fullImageView.alt = alt;
+    fullImageModal.classList.add('active');
+}
+
+function closeFullImage() {
+    if (!fullImageModal || !fullImageView) return;
+
+    fullImageModal.classList.remove('active');
+    fullImageView.src = '';
+}
+
+fullImageClose?.addEventListener('click', closeFullImage);
+
+fullImageModal?.addEventListener('click', (e) => {
+    if (e.target === fullImageModal) {
+        closeFullImage();
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeFullImage();
+    }
+});
 
 // ================== FETCH FOLDERS ==================
 async function fetchFolders() {
@@ -201,15 +231,7 @@ function renderImages(images, folderName = '') {
         image.style.objectFit = 'cover';
 
         image.addEventListener('click', () => {
-            if (previewImg) {
-                previewImg.src = img.url;
-                previewImg.decoding = 'async';
-            }
-
-            imagePreview?.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center'
-            });
+            openFullImage(img.url, image.alt);
         });
 
         fragment.appendChild(image);
