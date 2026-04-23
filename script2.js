@@ -48,6 +48,7 @@ const modal = document.getElementById('galleryModal');
 const closeModalBtn = document.querySelector('.close');
 const foldersContainer = document.getElementById('foldersContainer');
 const imagesContainer = document.getElementById('imagesContainer');
+const gallerySection = document.querySelector('.gallery-section');
 
 const fullImageModal = document.getElementById('fullImageModal');
 const fullImageView = document.getElementById('fullImageView');
@@ -60,17 +61,24 @@ const FOLDER_IMAGES_ENDPOINT = `${BASE_URL}/functions/v1/gallery-folder-images`;
 let foldersCache = null;
 const imagesCache = new Map();
 
-// Open modal
+// Open modal after smooth scroll to gallery section
 openGalleryBtn?.addEventListener('click', async () => {
     if (!modal) return;
 
-    modal.style.display = 'block';
+    gallerySection?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
 
-    if (!foldersCache) {
-        await fetchFolders();
-    } else {
-        renderFolders(foldersCache);
-    }
+    setTimeout(async () => {
+        modal.style.display = 'block';
+
+        if (!foldersCache) {
+            await fetchFolders();
+        } else {
+            renderFolders(foldersCache);
+        }
+    }, 500);
 });
 
 // Close gallery modal
@@ -160,10 +168,6 @@ function renderFolders(folders) {
 
         div.addEventListener('click', async () => {
             await fetchImages(folder.id, folder.name);
-            imagesContainer?.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
         });
 
         foldersContainer.appendChild(div);
