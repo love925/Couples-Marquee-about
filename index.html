@@ -4,13 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Couples Marquee</title>
+
+    <link rel="preload" as="image" href="images/marquee.webp">
+    <link rel="preload" as="image" href="images/gallery1.webp">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <!-- Header / Marquee Section -->
     <header class="header">
-        <img src="images/marquee.jpg" alt="Couples Marquee" class="marquee-img">
+        <img
+            src="images/marquee.webp"
+            alt="Couples Marquee"
+            class="marquee-img"
+            width="1280"
+            height="853"
+            fetchpriority="high"
+            decoding="async"
+        >
         <h1>Couples Marquee</h1>
     </header>
 
@@ -20,41 +32,48 @@
 
         <!-- Slider -->
         <div class="slider-container">
-            <button id="prevBtn">&#10094;</button>
+            <button id="prevBtn" type="button" aria-label="Previous image">&#10094;</button>
             <div class="slider" id="slider"></div>
-            <button id="nextBtn">&#10095;</button>
+            <button id="nextBtn" type="button" aria-label="Next image">&#10095;</button>
         </div>
 
-        <button id="openGalleryBtn" class="btn">Open Gallery</button>
+        <button id="openGalleryBtn" class="btn" type="button">Open Gallery</button>
 
         <!-- Gallery Modal -->
-<div id="galleryModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
+        <div id="galleryModal" class="modal">
+            <div class="modal-content">
+                <span class="close" role="button" aria-label="Close gallery" tabindex="0">&times;</span>
 
-        <!-- Folder list -->
-        <div class="folders-scroll" id="foldersContainer"></div>
+                <!-- Folder list -->
+                <div class="folders-scroll" id="foldersContainer"></div>
 
-        <!-- Images + Preview Layout -->
-        <div class="gallery-body">
-            <!-- Images Grid -->
-            <div class="images-grid" id="imagesContainer"></div>
+                <!-- Images + Preview Layout -->
+                <div class="gallery-body">
+                    <!-- Images Grid -->
+                    <div class="images-grid" id="imagesContainer"></div>
 
-            <!-- Image Preview -->
-            <div class="image-preview" id="imagePreview">
-                <img id="previewImg" src="" >
+                    <!-- Image Preview -->
+                    <div class="image-preview" id="imagePreview">
+                        <img id="previewImg" src="" alt="Preview image" decoding="async">
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-
-
+    </section>
 
     <!-- About Section -->
     <section class="about-section">
         <h2>About</h2>
         <div class="about-content">
-            <img src="images/about.jpg" alt="Couples Marquee" class="about-img">
+            <img
+                src="images/about.webp"
+                alt="Couples Marquee"
+                class="about-img"
+                width="872"
+                height="939"
+                loading="lazy"
+                decoding="async"
+            >
             <div class="about-info">
                 <p><strong>Name:</strong> ALi Haider</p>
                 <p><strong>Address:</strong> 123 Main Street, City, Country</p>
